@@ -3,7 +3,7 @@ import { Form, Button, Container } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { LOGIN } from '../redux/actions/index';
+import { LOGIN } from '../redux/actions';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -16,20 +16,19 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      // Prima, ottieni il cookie CSRF
       await axios.get('/sanctum/csrf-cookie');
+      const response = await axios.post('/login', { email, password });
+      console.log('User data:', response.data); // Log per verificare i dati dell'utente
 
-      // Poi, esegui la richiesta di login
-      const response = await axios.post('/login', {
-        email,
-        password,
-      });
+      // Assicurati di accedere correttamente ai dati dell'utente
+      const user = response.data.user;
 
-      // Dispatch dell'azione LOGIN
-      dispatch({ type: LOGIN, payload: response.data.user });
-
-      console.log('Login successful', response.data);
-      navigate('/'); // Reindirizza alla pagina principale
+      if (user) {
+        dispatch({ type: LOGIN, payload: user });
+        navigate('/');
+      } else {
+        setError('Login failed: no user data received');
+      }
     } catch (error) {
       setError('Login failed');
       console.error('Error response:', error.response);
@@ -49,7 +48,6 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
-
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
@@ -59,9 +57,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-
         {error && <p style={{ color: 'red' }}>{error}</p>}
-
         <Button variant="primary" type="submit">
           Login
         </Button>
@@ -71,3 +67,4 @@ const Login = () => {
 };
 
 export default Login;
+

@@ -5,13 +5,10 @@ const initialState = {
 };
 
 const mainReducer = (state = initialState, action) => {
-    // action = {
-    //     type: 'login',
-    //     payload: dati
-    // }
-
+    console.log('Action received:', action); // Log per verificare le azioni ricevute
     switch (action.type) {
         case LOGIN:
+            console.log('Setting user:', action.payload); // Log per verificare il payload
             return {
                 ...state,
                 user: action.payload,
