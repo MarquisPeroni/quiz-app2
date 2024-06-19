@@ -20,7 +20,6 @@ const Login = () => {
       const response = await axios.post('/login', { email, password });
       console.log('User data:', response.data); // Log per verificare i dati dell'utente
 
-      // Assicurati di accedere correttamente ai dati dell'utente
       const user = response.data.user;
 
       if (user) {

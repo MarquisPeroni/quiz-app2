@@ -4,8 +4,13 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import NavbarComponent from './components/Navbar';
+import QuizList from './pages/QuizList';
+import Quiz from './pages/Quiz';
+import axios from 'axios';
 
 function App() {
+  axios.defaults.withCredentials = true;
+    axios.defaults.withXSRFToken = true;
   return (
     <Router>
       <div>
@@ -14,6 +19,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/quizzes" element={<QuizList />} />
+          <Route path="/quiz/:id" element={<Quiz />} />
         </Routes>
       </div>
     </Router>
