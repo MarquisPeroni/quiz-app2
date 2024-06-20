@@ -14,6 +14,7 @@ const Register = () => {
     password: '',
     password_confirmation: '',
   });
+  const [error, setError] = useState('');
 
   const updateInputValue = (ev) => {
     setFormData((oldFormData) => ({
@@ -22,15 +23,27 @@ const Register = () => {
     }));
   };
 
-  const submitRegister = (ev) => {
+  const submitRegister = async (ev) => {
     ev.preventDefault();
-    axios
-      .get('/sanctum/csrf-cookie')
-      .then(() => axios.post('/register', formData))
-      .then((res) => {
-        dispatch({ type: LOGIN, payload: res.data.user });
+    setError(''); // Reset error state
+
+    try {
+      await axios.get('/sanctum/csrf-cookie');
+      const response = await axios.post('/register', formData);
+      console.log('Registration response:', response); // Aggiungi questo log
+      const user = response.data.user;
+
+      if (user) {
+        dispatch({ type: LOGIN, payload: user });
+        localStorage.setItem('user', JSON.stringify(user));
         navigate('/');
-      });
+      } else {
+        setError('Registration failed: no user data received');
+      }
+    } catch (error) {
+      setError('Registration failed');
+      console.error('Error response:', error); // Aggiungi questo log
+    }
   };
 
   return (
@@ -77,6 +90,7 @@ const Register = () => {
             value={formData.password_confirmation}
           />
         </Form.Group>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <Button variant="primary" type="submit">
           Register
         </Button>

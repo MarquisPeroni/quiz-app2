@@ -1,8 +1,8 @@
-import React from 'react';
-import { Navbar, Nav, Button } from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { LOGOUT } from '../redux/actions';
+import { LOGOUT, LOGIN } from '../redux/actions';
 import axios from 'axios';
 
 const NavbarComponent = () => {
@@ -10,12 +10,18 @@ const NavbarComponent = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
 
-  console.log('User in Navbar:', user); // Log per verificare lo stato dell'utente
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      dispatch({ type: LOGIN, payload: JSON.parse(storedUser) });
+    }
+  }, [dispatch]);
 
   const handleLogout = async () => {
     try {
       await axios.post('/logout');
       dispatch({ type: LOGOUT });
+      localStorage.removeItem('user');
       navigate('/login');
     } catch (error) {
       console.error('Logout failed', error);
@@ -27,7 +33,7 @@ const NavbarComponent = () => {
       <Navbar.Brand as={Link} to="/">Quiz App</Navbar.Brand>
       <Nav className="mr-auto">
         <Nav.Link as={Link} to="/">Home</Nav.Link>
-        {user && <Nav.Link as={Link} to="/quiz">Quiz</Nav.Link>}
+        {user && <Nav.Link as={Link} to="/quizzes">Quizzes</Nav.Link>}
       </Nav>
       <Nav>
         {!user ? (
@@ -36,7 +42,9 @@ const NavbarComponent = () => {
             <Nav.Link as={Link} to="/register">Register</Nav.Link>
           </>
         ) : (
-          <Button variant="outline-light" onClick={handleLogout}>Logout</Button>
+          <NavDropdown title={user.name} id="user-dropdown">
+            <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+          </NavDropdown>
         )}
       </Nav>
     </Navbar>

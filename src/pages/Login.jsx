@@ -18,12 +18,11 @@ const Login = () => {
     try {
       await axios.get('/sanctum/csrf-cookie');
       const response = await axios.post('/login', { email, password });
-      console.log('User data:', response.data); // Log per verificare i dati dell'utente
-
       const user = response.data.user;
 
       if (user) {
         dispatch({ type: LOGIN, payload: user });
+        localStorage.setItem('user', JSON.stringify(user));
         navigate('/');
       } else {
         setError('Login failed: no user data received');
@@ -66,4 +65,3 @@ const Login = () => {
 };
 
 export default Login;
-
