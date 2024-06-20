@@ -12,12 +12,21 @@ const Quiz = () => {
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(null);
 
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
   useEffect(() => {
     axios.get(`/api/quizzes/${id}`)
       .then(response => {
         console.log('Quiz data:', response.data);  // Aggiungi questo console.log per verificare i dati ricevuti
         if (Array.isArray(response.data.questions)) {
-          setQuestions(response.data.questions);  // Assicurati che sia un array
+          const shuffledQuestions = shuffleArray(response.data.questions);  // Mescola le domande
+          setQuestions(shuffledQuestions);  // Assicurati che sia un array
         } else {
           console.error('Questions is not an array:', response.data.questions);
         }

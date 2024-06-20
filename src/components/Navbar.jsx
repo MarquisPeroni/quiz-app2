@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { LOGOUT, LOGIN } from '../redux/actions';
@@ -9,6 +9,8 @@ const NavbarComponent = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
+
+  console.log('Navbar user state:', user);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -33,7 +35,12 @@ const NavbarComponent = () => {
       <Navbar.Brand as={Link} to="/">Quiz App</Navbar.Brand>
       <Nav className="mr-auto">
         <Nav.Link as={Link} to="/">Home</Nav.Link>
-        {user && <Nav.Link as={Link} to="/quizzes">Quizzes</Nav.Link>}
+        {user && (
+          <>
+            <Nav.Link as={Link} to="/quizzes">Quizzes</Nav.Link>
+            <Nav.Link as={Link} to="/results">Results</Nav.Link>
+          </>
+        )}
       </Nav>
       <Nav>
         {!user ? (
