@@ -25,8 +25,13 @@ const Quiz = () => {
       .then(response => {
         console.log('Quiz data:', response.data);  // Aggiungi questo console.log per verificare i dati ricevuti
         if (Array.isArray(response.data.questions)) {
-          const shuffledQuestions = shuffleArray(response.data.questions);  // Mescola le domande
-          setQuestions(shuffledQuestions);  // Assicurati che sia un array
+          const questionsWithShuffledAnswers = response.data.questions.map(question => {
+            return {
+              ...question,
+              answers: shuffleArray([...question.answers])  // Mescola le risposte
+            };
+          });
+          setQuestions(shuffleArray(questionsWithShuffledAnswers));  // Mescola le domande
         } else {
           console.error('Questions is not an array:', response.data.questions);
         }

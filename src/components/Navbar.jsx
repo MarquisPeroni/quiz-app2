@@ -39,6 +39,7 @@ const NavbarComponent = () => {
           <>
             <Nav.Link as={Link} to="/quizzes">Quizzes</Nav.Link>
             <Nav.Link as={Link} to="/results">Results</Nav.Link>
+            <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
           </>
         )}
       </Nav>

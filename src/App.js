@@ -11,6 +11,7 @@ import PrivateRoute from './components/PrivateRoute';
 import { useDispatch } from 'react-redux';
 import { LOGIN } from './redux/actions';
 import Results from './pages/Results';
+import Profile from './pages/Profile';
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ function App() {
           <Route path="/quizzes" element={<PrivateRoute element={QuizList} />} />
           <Route path="/quiz/:id" element={<PrivateRoute element={Quiz} />} />
           <Route path="/results" element={<PrivateRoute element={Results} />} />
+          <Route path="/profile" element={<PrivateRoute element={Profile} />} />
         </Routes>
       </div>
     </Router>
