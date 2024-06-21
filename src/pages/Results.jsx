@@ -35,16 +35,31 @@ const Results = () => {
     }
   };
 
+  // Raggruppa i risultati per titolo del quiz
+  const groupedResults = results.reduce((acc, result) => {
+    const quizTitle = result.quiz.title;
+    if (!acc[quizTitle]) {
+      acc[quizTitle] = [];
+    }
+    acc[quizTitle].push(result);
+    return acc;
+  }, {});
+
   return (
     <Container className="mt-5">
       <h2>All Quiz Results</h2>
-      <ListGroup>
-        {results.map(result => (
-          <ListGroup.Item key={result.id}>
-            <strong>User:</strong> {result.user.name} - <strong>Quiz:</strong> {result.quiz.title} - <strong>Score:</strong> {result.score}
-          </ListGroup.Item>
-        ))}
-      </ListGroup>
+      {Object.keys(groupedResults).map(quizTitle => (
+        <div key={quizTitle} className="mb-4">
+          <h3>{quizTitle}</h3>
+          <ListGroup>
+            {groupedResults[quizTitle].map(result => (
+              <ListGroup.Item key={result.id}>
+                <strong>User:</strong> {result.user.name} - <strong>Score:</strong> {result.score}
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </div>
+      ))}
       <div className="d-flex justify-content-between mt-3">
         <Button variant="primary" disabled={currentPage === 1} onClick={handlePreviousPage}>
           Previous

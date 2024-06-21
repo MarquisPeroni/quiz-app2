@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Button, Form } from 'react-bootstrap';
+import { Container, Button, Form, ProgressBar } from 'react-bootstrap';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
@@ -11,6 +11,7 @@ const Quiz = () => {
   const [answers, setAnswers] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(null);
+  const [timer, setTimer] = useState(30); // Timer di 30 secondi
 
   const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -18,6 +19,16 @@ const Quiz = () => {
       [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
+  };
+
+  const getRandomQuestions = (questions) => {
+    const multipleChoiceQuestions = questions.filter(q => q.answers.length > 2);
+    const trueFalseQuestions = questions.filter(q => q.answers.length === 2);
+
+    const shuffledMultipleChoice = shuffleArray(multipleChoiceQuestions).slice(0, 8);
+    const shuffledTrueFalse = shuffleArray(trueFalseQuestions).slice(0, 2);
+
+    return shuffleArray([...shuffledMultipleChoice, ...shuffledTrueFalse]);
   };
 
   useEffect(() => {
@@ -31,7 +42,8 @@ const Quiz = () => {
               answers: shuffleArray([...question.answers])  // Mescola le risposte
             };
           });
-          setQuestions(shuffleArray(questionsWithShuffledAnswers));  // Mescola le domande
+          const randomQuestions = getRandomQuestions(questionsWithShuffledAnswers);
+          setQuestions(randomQuestions);  // Mescola le domande
         } else {
           console.error('Questions is not an array:', response.data.questions);
         }
@@ -42,6 +54,16 @@ const Quiz = () => {
       });
   }, [id]);
 
+  useEffect(() => {
+    if (timer === 0) {
+      handleNextQuestion();
+    }
+    const interval = setInterval(() => {
+      setTimer(prevTimer => (prevTimer > 0 ? prevTimer - 1 : 0));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [timer]);
+
   const handleChange = (e) => {
     setAnswers({
       ...answers,
@@ -50,13 +72,16 @@ const Quiz = () => {
   };
 
   const handleNextQuestion = (e) => {
-    e.preventDefault();
-    setCurrentQuestionIndex(currentQuestionIndex + 1);
+    e && e.preventDefault();
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setTimer(30); // Reset timer
+    } else {
+      handleSubmit();
+    }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const handleSubmit = () => {
     const formattedAnswers = Object.entries(answers).map(([question_id, answer_id]) => ({
       question_id: parseInt(question_id, 10),
       answer_id: parseInt(answer_id, 10),
@@ -66,13 +91,13 @@ const Quiz = () => {
       quiz_id: id,
       answers: formattedAnswers,
     })
-    .then(response => {
-      setSubmitted(true);
-      setScore(response.data.score);  // Assume the server returns the score
-    })
-    .catch(error => {
-      console.error('Error submitting quiz:', error);
-    });
+      .then(response => {
+        setSubmitted(true);
+        setScore(response.data.score);  // Assume the server returns the score
+      })
+      .catch(error => {
+        console.error('Error submitting quiz:', error);
+      });
   };
 
   if (submitted) {
@@ -97,7 +122,7 @@ const Quiz = () => {
   return (
     <Container className="mt-5">
       <h2>{quiz.title}</h2>
-      <Form onSubmit={currentQuestionIndex < questions.length - 1 ? handleNextQuestion : handleSubmit}>
+      <Form onSubmit={handleNextQuestion}>
         {currentQuestion && (
           <div key={currentQuestion.id}>
             <h4>{currentQuestion.question_text}</h4>
@@ -111,6 +136,7 @@ const Quiz = () => {
                 onChange={handleChange}
               />
             ))}
+            <ProgressBar now={(timer / 30) * 100} label={`${timer}s`} className="mt-3" />
           </div>
         )}
         <Button variant="primary" type="submit">
