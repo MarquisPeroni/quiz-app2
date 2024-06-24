@@ -8,6 +8,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
 
+  // Check for stored user in localStorage on component mount
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {

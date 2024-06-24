@@ -23,6 +23,7 @@ const Register = () => {
     }));
   };
 
+  // Handle user registration
   const submitRegister = async (ev) => {
     ev.preventDefault();
     setError(''); // Reset error state
@@ -30,7 +31,7 @@ const Register = () => {
     try {
       await axios.get('/sanctum/csrf-cookie');
       const response = await axios.post('/register', formData);
-      console.log('Registration response:', response); // Aggiungi questo log
+      console.log('Registration response:', response); // log
       const user = response.data.user;
 
       if (user) {
@@ -42,7 +43,7 @@ const Register = () => {
       }
     } catch (error) {
       setError('Registration failed');
-      console.error('Error response:', error); // Aggiungi questo log
+      console.error('Error response:', error); // log
     }
   };
 

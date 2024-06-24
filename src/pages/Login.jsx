@@ -12,6 +12,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // Handle user login
   const handleLogin = async (e) => {
     e.preventDefault();
 

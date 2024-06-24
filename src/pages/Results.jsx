@@ -7,6 +7,7 @@ const Results = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
+  // Fetch results on component mount and page change
   useEffect(() => {
     fetchResults(currentPage);
   }, [currentPage]);
@@ -35,7 +36,7 @@ const Results = () => {
     }
   };
 
-  // Raggruppa i risultati per titolo del quiz
+  // Group results by quiz title
   const groupedResults = results.reduce((acc, result) => {
     const quizTitle = result.quiz.title;
     if (!acc[quizTitle]) {

@@ -6,12 +6,12 @@ import { useParams } from 'react-router-dom';
 const Quiz = () => {
   const { id } = useParams();
   const [quiz, setQuiz] = useState(null);
-  const [questions, setQuestions] = useState([]);  // Inizializza come array vuoto
+  const [questions, setQuestions] = useState([]); 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(null);
-  const [timer, setTimer] = useState(30); // Timer di 30 secondi
+  const [timer, setTimer] = useState(30); // 30 seconds Timer
 
   const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -31,19 +31,20 @@ const Quiz = () => {
     return shuffleArray([...shuffledMultipleChoice, ...shuffledTrueFalse]);
   };
 
+  // Fetch quiz data on component mount
   useEffect(() => {
     axios.get(`/api/quizzes/${id}`)
       .then(response => {
-        console.log('Quiz data:', response.data);  // Aggiungi questo console.log per verificare i dati ricevuti
+        console.log('Quiz data:', response.data);  // log 
         if (Array.isArray(response.data.questions)) {
           const questionsWithShuffledAnswers = response.data.questions.map(question => {
             return {
               ...question,
-              answers: shuffleArray([...question.answers])  // Mescola le risposte
+              answers: shuffleArray([...question.answers])  // Shuffle Questions
             };
           });
           const randomQuestions = getRandomQuestions(questionsWithShuffledAnswers);
-          setQuestions(randomQuestions);  // Mescola le domande
+          setQuestions(randomQuestions);  // Shuffle Answers
         } else {
           console.error('Questions is not an array:', response.data.questions);
         }
@@ -54,6 +55,7 @@ const Quiz = () => {
       });
   }, [id]);
 
+  // Timer logic
   useEffect(() => {
     if (timer === 0) {
       handleNextQuestion();

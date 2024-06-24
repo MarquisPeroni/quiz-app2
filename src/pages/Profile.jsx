@@ -7,6 +7,7 @@ const Profile = () => {
   const [results, setResults] = useState([]);
   const user = useSelector(state => state.user);
 
+  // Fetch user results on component mount
   useEffect(() => {
     if (user) {
       axios.get(`/api/users/${user.id}/results`)

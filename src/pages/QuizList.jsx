@@ -6,6 +6,7 @@ import axios from 'axios';
 const QuizList = () => {
   const [quizzes, setQuizzes] = useState([]);
 
+  // Fetch quiz list on component mount
   useEffect(() => {
     axios.get('/api/quizzes').then(response => {
       setQuizzes(response.data);

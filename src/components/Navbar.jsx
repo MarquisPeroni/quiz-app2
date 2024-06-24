@@ -12,6 +12,7 @@ const NavbarComponent = () => {
 
   console.log('Navbar user state:', user);
 
+  // Check for stored user in localStorage on component mount
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
@@ -19,6 +20,7 @@ const NavbarComponent = () => {
     }
   }, [dispatch]);
 
+  // Handle user logout
   const handleLogout = async () => {
     try {
       await axios.post('/logout');

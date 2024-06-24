@@ -16,6 +16,7 @@ import Profile from './pages/Profile';
 function App() {
   const dispatch = useDispatch();
 
+  // Check for stored user in localStorage on app mount
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
