@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,41 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+/* Login Style */
+
+/* Login.css */
+
+/* .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+} */
+
+
+/* Login Style End */
+
+/* Homepage */
+
+
+
+/* Homepage End */
+body {
+  font-family: 'Pixelify Sans', sans-serif;
 }

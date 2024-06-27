@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
-import NavbarComponent from './components/Navbar';
 import QuizList from './pages/QuizList';
 import Quiz from './pages/Quiz';
 import axios from 'axios';
@@ -12,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { LOGIN } from './redux/actions';
 import Results from './pages/Results';
 import Profile from './pages/Profile';
+import './App.css';
 
 function App() {
   const dispatch = useDispatch();
@@ -28,7 +28,6 @@ function App() {
   return (
     <Router>
       <div>
-        <NavbarComponent />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />

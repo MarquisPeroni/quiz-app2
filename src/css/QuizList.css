@@ -1,0 +1,90 @@
+.quizlist-page {
+    background-size: cover !important;
+    background-position: center !important;
+    height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    overflow: hidden !important;
+  }
+  
+  .quizlist-content-container {
+    flex: 1 0 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow-y: auto !important;
+    margin-top: 70px !important; 
+    margin-bottom: 50px !important; 
+  }
+  
+  .quizlist-scrollable {
+    width: 100% !important;
+    max-width: 1400px !important;
+    background-color: rgba(15, 2, 41, 0.4) !important;
+    padding: 40px !important;
+    border-radius: 10px !important;
+    border: 2px solid black !important;
+    overflow-y: auto !important;
+    max-height: 70vh !important; 
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; 
+  }
+  
+  .bordered-text {
+    color: #ffffff !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7) !important;
+  }
+  
+  .quiz-card {
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    border: none !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+    width: 100% !important;
+    max-width: 1000px !important; 
+  }
+  
+  .footer-container {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 10px 20px !important;
+    background-color: transparent !important;
+    color: #ffffff !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    box-shadow: none !important;
+  }
+  
+  .footer-left {
+    font-size: 30px !important;
+    font-weight: bold !important;
+    margin-left: 40px !important;
+  }
+  
+  .footer-right {
+    font-size: 20px !important;
+    font-style: italic !important;
+    text-align: right !important;
+    margin-right: 40px !important;
+  }
+  
+  .crimson-red {
+    color: crimson !important;
+  }
+  
+  .custom-navbar {
+    background-color: transparent !important; 
+    border-bottom: none !important; 
+    box-shadow: none !important; 
+  }
+
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent !important; 
+  }
+  

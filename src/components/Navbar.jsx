@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { LOGOUT, LOGIN } from '../redux/actions';
 import axios from 'axios';
+import '../css/Navbar.css'; 
 
 const NavbarComponent = () => {
   const navigate = useNavigate();
@@ -33,15 +34,13 @@ const NavbarComponent = () => {
   };
 
   return (
-    <Navbar bg="dark" variant="dark">
-      <Navbar.Brand as={Link} to="/">Quiz App</Navbar.Brand>
+    <Navbar className="custom-navbar" variant="dark">
+      <Navbar.Brand as={Link} to="/">Homepage</Navbar.Brand>
       <Nav className="mr-auto">
-        <Nav.Link as={Link} to="/">Home</Nav.Link>
         {user && (
           <>
             <Nav.Link as={Link} to="/quizzes">Quizzes</Nav.Link>
             <Nav.Link as={Link} to="/results">Results</Nav.Link>
-            <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
           </>
         )}
       </Nav>
@@ -53,6 +52,7 @@ const NavbarComponent = () => {
           </>
         ) : (
           <NavDropdown title={user.name} id="user-dropdown">
+            <NavDropdown.Item as={Link} to="/profile">Profile</NavDropdown.Item>
             <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
           </NavDropdown>
         )}

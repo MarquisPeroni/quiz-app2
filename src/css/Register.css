@@ -1,0 +1,116 @@
+.register-container {
+    height: 100vh !important; 
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: rgba(15, 2, 41, 0.8) !important; 
+  }
+  
+  .register-background {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; 
+    z-index: -1 !important; 
+  }
+  
+  .register-form-container {
+    width: 100% !important;
+    max-width: 600px !important; 
+    padding: 50px !important; 
+    background-color: rgba(55, 52, 80, 0.6) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+    position: relative !important;
+    z-index: 1 !important; 
+  }
+  
+  .text-light {
+    color: #ffffff !important;
+  }
+  
+  .text-fluo-green {
+    color: #39ff14 !important; 
+  }
+  
+  .text-fluo-pink {
+    color: #ff1493 !important; 
+  }
+  
+  .text-fluo-blue {
+    color: #00bfff !important; 
+  }
+  
+  .fluo-input {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
+    border: 1px solid #ffffff !important;
+  }
+  
+  .fluo-button {
+    background-color: #0047a3 !important; 
+    border: none !important;
+    color: #ffffff !important;
+    width: 100% !important;
+    padding: 15px !important; 
+    font-size: 1.2em !important; 
+    border-radius: 5px !important;
+    transition: background-color 0.3s ease !important;
+  }
+  
+  .fluo-button-alt-green {
+    background-color: #39ff14 !important;
+    border: none !important;
+    color: #000000 !important;
+    width: 100% !important;
+    padding: 15px !important; 
+    font-size: 1em !important; 
+    border-radius: 5px !important;
+    transition: background-color 0.3s ease !important;
+    margin-top: 10px !important; 
+  }
+  
+  .fluo-button:hover {
+    background-color: #007acc !important; 
+  }
+  
+  .fluo-button-alt-green:hover {
+    background-color: #32cd32 !important; 
+    color: rgb(255, 255, 255) !important;
+    transition: color 0.3s ease !important;
+  }
+  
+  .fluo-input::placeholder {
+    color: #ffffff !important;
+    opacity: 0.7 !important; 
+  }
+  
+  /* Media Queries for Responsive Design */
+  @media (max-width: 767px) {
+    .register-form-container {
+      max-width: 90% !important; 
+      padding: 20px !important; 
+    }
+  
+    .register-container {
+      justify-content: center !important; 
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 991px) {
+    .register-form-container {
+      max-width: 80% !important;
+      padding: 30px !important; 
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .register-form-container {
+      max-width: 700px !important;
+      padding: 50px !important;
+    }
+  }
+  

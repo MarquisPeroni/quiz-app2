@@ -1,13 +1,14 @@
-import axios from 'axios';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { LOGIN } from '../redux/actions/index';
-import { Form, Button, Container } from 'react-bootstrap';
+import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
+import { LOGIN } from '../redux/actions';
+import { Button, Form } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../css/Register.css'; 
+import registerImage from '../assets/loginbit.jpg'; 
 
 const Register = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,6 +16,8 @@ const Register = () => {
     password_confirmation: '',
   });
   const [error, setError] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const updateInputValue = (ev) => {
     setFormData((oldFormData) => ({
@@ -23,15 +26,13 @@ const Register = () => {
     }));
   };
 
-  // Handle user registration
   const submitRegister = async (ev) => {
     ev.preventDefault();
-    setError(''); // Reset error state
+    setError('');
 
     try {
       await axios.get('/sanctum/csrf-cookie');
       const response = await axios.post('/register', formData);
-      console.log('Registration response:', response); // log
       const user = response.data.user;
 
       if (user) {
@@ -43,60 +44,70 @@ const Register = () => {
       }
     } catch (error) {
       setError('Registration failed');
-      console.error('Error response:', error); // log
+      console.error('Error response:', error.response);
     }
   };
 
   return (
-    <Container>
-      <h2>Register</h2>
-      <Form onSubmit={submitRegister} noValidate>
-        <Form.Group controlId="formBasicName">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter your name"
-            name="name"
-            onChange={updateInputValue}
-            value={formData.name}
-          />
-        </Form.Group>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter email"
-            name="email"
-            onChange={updateInputValue}
-            value={formData.email}
-          />
-        </Form.Group>
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            name="password"
-            onChange={updateInputValue}
-            value={formData.password}
-          />
-        </Form.Group>
-        <Form.Group controlId="formBasicConfirmPassword">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Confirm Password"
-            name="password_confirmation"
-            onChange={updateInputValue}
-            value={formData.password_confirmation}
-          />
-        </Form.Group>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <Button variant="primary" type="submit">
-          Register
-        </Button>
-      </Form>
-    </Container>
+    <div className="register-container">
+      <img src={registerImage} className="register-background" alt="Register" />
+      <div className="register-form-container">
+        <h2 className="mb-4 text-light">Register</h2>
+        <Form onSubmit={submitRegister}>
+          <Form.Group className="mb-4" controlId="formName">
+            <Form.Label className="text-fluo-green">Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter your name"
+              name="name"
+              value={formData.name}
+              onChange={updateInputValue}
+              className="fluo-input"
+            />
+          </Form.Group>
+          <Form.Group className="mb-4" controlId="formEmail">
+            <Form.Label className="text-fluo-pink">Email address</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
+              name="email"
+              value={formData.email}
+              onChange={updateInputValue}
+              className="fluo-input"
+            />
+          </Form.Group>
+          <Form.Group className="mb-4" controlId="formPassword">
+            <Form.Label className="text-fluo-blue">Password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={formData.password}
+              onChange={updateInputValue}
+              className="fluo-input"
+            />
+          </Form.Group>
+          <Form.Group className="mb-4" controlId="formConfirmPassword">
+            <Form.Label className="text-fluo-green">Confirm Password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Confirm Password"
+              name="password_confirmation"
+              value={formData.password_confirmation}
+              onChange={updateInputValue}
+              className="fluo-input"
+            />
+          </Form.Group>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          <Button variant="primary" type="submit" className="fluo-button mb-2">
+            Register
+          </Button>
+          <Button variant="secondary" as={Link} to="/login" className="fluo-button-alt-green">
+            or login
+          </Button>
+        </Form>
+      </div>
+    </div>
   );
 };
 
