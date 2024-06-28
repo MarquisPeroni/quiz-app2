@@ -38,11 +38,63 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7) !important;
 }
 
+.text-forest-green {
+    color: #228B22 !important; 
+}
+
+.text-light {
+    color: #ffffff !important;
+}
+
 .quiz-card {
     background-color: rgba(0, 0, 0, 0.6) !important;
     border: none !important;
     color: #ffffff !important;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
     width: 100% !important;
-    max-width: 1000px !important; 
+    max-width: 100% !important; 
+    display: flex !important;
+    align-items: center !important;
+}
+
+.quiz-card .card-body {
+    width: 100% !important; 
+}
+
+@media (max-width: 767px) {
+    .profile-scrollable {
+        padding: 20px !important;
+    }
+
+    .quiz-card {
+        max-width: 100% !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .profile-scrollable {
+        padding: 30px !important;
+    }
+
+    .quiz-card {
+        max-width: 100% !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .profile-scrollable {
+        padding: 40px !important;
+    }
+
+    .quiz-card {
+        max-width: 100% !important;
+    }
+}
+
+.score-text {
+    font-size: 1.5em; 
+}
+
+.formatted-score {
+    font-size: 1.5em; 
 }

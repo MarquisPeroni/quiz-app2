@@ -64,7 +64,7 @@ const Login = () => {
           </Form.Group>
           {error && <p style={{ color: 'red' }}>{error}</p>}
           <Button variant="primary" type="submit" className="fluo-button mb-2">
-            Sign in
+            Login
           </Button>
           <Button variant="secondary" as={Link} to="/register" className="fluo-button-alt-green">
             or register

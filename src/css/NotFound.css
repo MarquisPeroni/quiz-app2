@@ -1,0 +1,28 @@
+.notfound-page {
+    background-color: #000;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notfound-container {
+    background-color: rgba(15, 2, 41, 0.8);
+    padding: 40px;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+.text-light {
+    color: #ffffff;
+}
+
+.notfound-page h1 {
+    font-size: 10rem;
+}
+
+.murloc-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px; 
+}

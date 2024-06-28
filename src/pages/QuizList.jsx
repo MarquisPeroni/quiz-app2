@@ -25,9 +25,9 @@ const QuizList = () => {
           {quizzes.map(quiz => (
             <Card key={quiz.id} className="mb-3 quiz-card">
               <Card.Body>
-                <Card.Title className="text-light">{quiz.title}</Card.Title>
+                <Card.Title className="text-yellow">{quiz.title.replace(' Quiz', '')}</Card.Title>
                 <Card.Text className="text-light">{quiz.description}</Card.Text>
-                <Button variant="dark" as={Link} to={`/quiz/${quiz.id}`}>
+                <Button variant="dark" as={Link} to={`/quiz/${quiz.id}`} className="yellow-button">
                   Start!
                 </Button>
               </Card.Body>

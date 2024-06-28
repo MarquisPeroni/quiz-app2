@@ -21,21 +21,30 @@
 
 .results-scrollable {
     width: 100% !important;
-    max-width: 1400px !important;
+    max-width: 1200px !important;
     background-color: rgba(15, 2, 41, 0.4) !important;
-    padding: 40px !important;
+    padding: 20px !important;
     border-radius: 10px !important;
     border: 2px solid black !important;
     overflow-y: auto !important;
     max-height: 70vh !important; 
     display: flex !important;
     flex-direction: column !important;
-    align-items: center !important; 
+    align-items: flex-start !important; 
 }
 
 .bordered-text {
-    color: #ffffff !important;
+    color: #ffaa00 !important;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7) !important;
+}
+
+.text-yellow-orange {
+    color: #ffaa00 !important; 
+    font-size: 1.5rem !important; 
+}
+
+.text-light {
+    color: #ffffff !important;
 }
 
 .result-card {
@@ -44,11 +53,73 @@
     color: #ffffff !important;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
     width: 100% !important;
-    max-width: 1000px !important; 
     text-align: left !important;
 }
 
 .arrow {
-    font-size: 2rem !important;
+    font-size: 3rem !important;
     color: #ffffff !important;
+    font-weight: bold !important;
+    text-decoration: none !important; 
+}
+
+.arrow-button {
+    padding: 0 !important; 
+    margin: 0 20px !important; 
+}
+
+.formatted-score {
+    font-size: 1.5rem !important; 
+}
+
+@media (max-width: 768px) {
+    .results-scrollable {
+        padding: 10px !important;
+    }
+
+    .bordered-text {
+        font-size: 1.2rem !important;
+    }
+
+    .text-yellow-orange {
+        font-size: 1.2rem !important;
+    }
+
+    .formatted-score {
+        font-size: 1.2rem !important;
+    }
+
+    .arrow {
+        font-size: 2rem !important;
+    }
+
+    .arrow-button {
+        margin: 0 10px !important;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .results-scrollable {
+        padding: 15px !important;
+    }
+
+    .bordered-text {
+        font-size: 1.4rem !important;
+    }
+
+    .text-yellow-orange {
+        font-size: 1.4rem !important;
+    }
+
+    .formatted-score {
+        font-size: 1.4rem !important;
+    }
+
+    .arrow {
+        font-size: 2.5rem !important;
+    }
+
+    .arrow-button {
+        margin: 0 15px !important;
+    }
 }

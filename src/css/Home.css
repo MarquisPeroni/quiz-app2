@@ -53,7 +53,7 @@
     }
   }
   
-  /* Styles for the quiz buttons */
+  
   .quiz-button {
     width: 100% !important;
     max-width: 200px !important; 
@@ -67,7 +67,7 @@
     box-shadow: 0px 0px 70px rgba(0, 0, 0, 0.7) !important;
   }
   
-  /* Specific styles for each quiz button */
+
   .quiz-button img {
     width: 24px;
     height: 24px;

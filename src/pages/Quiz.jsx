@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Container, Button, Form, ProgressBar } from 'react-bootstrap';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import NavbarComponent from '../components/Navbar';
+import Footer from '../components/Footer';
+import backgroundImage from '../assets/irithilbit.png';
+import '../css/Quiz.css';
 
 const Quiz = () => {
   const { id } = useParams();
@@ -55,16 +59,17 @@ const Quiz = () => {
       });
   }, [id]);
 
-  // Timer logic
-  useEffect(() => {
-    if (timer === 0) {
-      handleNextQuestion();
-    }
-    const interval = setInterval(() => {
-      setTimer(prevTimer => (prevTimer > 0 ? prevTimer - 1 : 0));
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [timer]);
+    // Timer logic
+  // useEffect(() => {
+  //   if (timer === 0) {
+  //     handleNextQuestion();
+  //   }
+  //   const interval = setInterval(() => {
+  //     setTimer(prevTimer => (prevTimer > 0 ? prevTimer - 1 : 0));
+  //   }, 1000);
+  //   return () => clearInterval(interval);
+  // }, [timer]); 
+  // DA LASCIARE QUA
 
   const handleChange = (e) => {
     setAnswers({
@@ -104,48 +109,61 @@ const Quiz = () => {
 
   if (submitted) {
     return (
-      <Container className="mt-5">
-        <h2>Thank you for completing the quiz!</h2>
-        <h3>Your score is: {score}</h3>
-      </Container>
+      <div className="quiz-page" style={{ backgroundImage: `url(${backgroundImage})` }}>
+        <NavbarComponent />
+        <Container className="quiz-container text-center p-5 mb-4 rounded-3">
+          <h2 className="text-yellow bordered-text mb-4">Thank you for completing the quiz!</h2>
+          <h3 className="text-yellow bordered-text">Your score is: {score}</h3>
+        </Container>
+        <Footer quote="Let this journey be the mark of your courage, just as mine was." />
+      </div>
     );
   }
 
   if (!quiz || !Array.isArray(questions) || questions.length === 0) {
     return (
-      <Container className="mt-5">
-        <h2>Loading quiz...</h2>
-      </Container>
+      <div className="quiz-page" style={{ backgroundImage: `url(${backgroundImage})` }}>
+        <NavbarComponent />
+        <Container className="quiz-container text-center p-5 mb-4 rounded-3">
+          <h2 className="text-yellow bordered-text">Loading quiz...</h2>
+        </Container>
+        <Footer quote="Let this journey be the mark of your courage, just as mine was." />
+      </div>
     );
   }
 
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
-    <Container className="mt-5">
-      <h2>{quiz.title}</h2>
-      <Form onSubmit={handleNextQuestion}>
-        {currentQuestion && (
-          <div key={currentQuestion.id}>
-            <h4>{currentQuestion.question_text}</h4>
-            {currentQuestion.answers.map(answer => (
-              <Form.Check
-                key={answer.id}
-                type="radio"
-                label={answer.answer_text}
-                name={`question-${currentQuestion.id}`}
-                value={answer.id}
-                onChange={handleChange}
-              />
-            ))}
-            <ProgressBar now={(timer / 30) * 100} label={`${timer}s`} className="mt-3" />
-          </div>
-        )}
-        <Button variant="primary" type="submit">
-          {currentQuestionIndex < questions.length - 1 ? 'Next' : 'Submit'}
-        </Button>
-      </Form>
-    </Container>
+    <div className="quiz-page" style={{ backgroundImage: `url(${backgroundImage})` }}>
+      <NavbarComponent />
+      <Container className="quiz-container text-center p-5 mb-4 rounded-3">
+        <h2 className="text-yellow bordered-text mb-4">{quiz.title.replace(' Quiz', '')}</h2>
+        <Form onSubmit={handleNextQuestion}>
+          {currentQuestion && (
+            <div key={currentQuestion.id} className="mb-4">
+              <h4 className="text-yellow bordered-text mb-3">{currentQuestion.question_text}</h4>
+              {currentQuestion.answers.map(answer => (
+                <Form.Check
+                  key={answer.id}
+                  type="radio"
+                  label={answer.answer_text}
+                  name={`question-${currentQuestion.id}`}
+                  value={answer.id}
+                  onChange={handleChange}
+                  className="text-yellow"
+                />
+              ))}
+              <ProgressBar now={(timer / 30) * 100} label={`${timer}s`} className="mt-3" />
+            </div>
+          )}
+          <Button variant="primary" type="submit" className="mt-3">
+            {currentQuestionIndex < questions.length - 1 ? 'Next' : 'Submit'}
+          </Button>
+        </Form>
+      </Container>
+      <Footer quote="Let this journey be the mark of your courage, just as mine was." />
+    </div>
   );
 };
 

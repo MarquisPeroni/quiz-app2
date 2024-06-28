@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { LOGIN } from './redux/actions';
 import Results from './pages/Results';
 import Profile from './pages/Profile';
+import NotFound from './pages/NotFound';
 import './App.css';
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           <Route path="/quiz/:id" element={<PrivateRoute element={Quiz} />} />
           <Route path="/results" element={<PrivateRoute element={Results} />} />
           <Route path="/profile" element={<PrivateRoute element={Profile} />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </Router>
