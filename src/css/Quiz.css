@@ -15,9 +15,10 @@
     align-items: center !important;
     justify-content: center !important;
     overflow-y: auto !important;
-    margin-top: 70px !important; 
-    margin-bottom: 50px !important; 
-    width: 100% !important;
+    margin: 20px auto !important;
+    margin-top: 100px !important;
+    margin-bottom: 100px !important;
+    width: 90% !important;
     max-width: 1200px !important;
     background-color: rgba(15, 2, 41, 0.4) !important;
     padding: 20px !important;
@@ -26,12 +27,50 @@
 }
 
 .bordered-text {
-    color: #ffaa00 !important; /* Giallo/Arancio */
+    color: #ffaa00 !important; 
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7) !important;
 }
 
 .text-light {
     color: #ffffff !important;
+}
+
+.quiz-answer {
+    display: flex !important;
+    align-items: center !important;
+    padding: 10px 20px !important;
+    margin-bottom: 10px !important;
+    cursor: pointer !important;
+    border-radius: 5px !important;
+    transition: all 0.3s ease !important;
+    color: #f5f38b !important;
+    background-color: transparent !important;
+}
+
+.quiz-answer:hover {
+    background-color: rgba(104, 104, 104, 0.2) !important;
+    cursor: pointer !important;
+}
+
+.quiz-answer input[type="radio"] {
+    display: none !important;
+}
+
+.quiz-answer input[type="radio"]:checked + label {
+    font-weight: bold !important;
+    color: #ffaa00 !important;
+}
+
+.quiz-answer label {
+    width: 100% !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.quiz-answer label span {
+    display: block !important;
+    cursor: pointer !important;
 }
 
 @media (max-width: 767px) {
@@ -51,3 +90,20 @@
         padding: 25px !important;
     }
 }
+
+/* ProgressBar */
+.custom-progress-bar .progress-bar {
+    background-color: #ff4800 !important; 
+    border-radius: 5px !important;
+    height: 30px !important;
+    font-size: large !important;
+    
+}
+
+.progress {
+    background-color: rgba(0, 0, 0, 0.4) !important; 
+    border-radius: 5px !important; 
+    height: 30px !important;
+
+}
+

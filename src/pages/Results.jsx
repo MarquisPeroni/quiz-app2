@@ -55,14 +55,14 @@ const Results = () => {
       <NavbarComponent />
       <div className="results-content-container">
         <Container className="results-scrollable text-center p-3 mb-4 mx-4 rounded-3">
-          <h2 className="text-yellow-orange bordered-text mb-4">Results</h2>
+          <h2 className="text-yellow-orange bordered-text-large mb-4">Results</h2>
           <ListGroup className="w-100">
             {results.map(result => (
               <Card key={result.id} className="mb-3 result-card w-100">
                 <Card.Body className="d-flex justify-content-between align-items-center">
                   <Col className="text-light text-start px-2"><strong>{result.user.name}</strong></Col>
                   <Col className="text-light text-center px-2"><strong>{cleanTitle(result.quiz.title)}</strong></Col>
-                  <Col className="text-yellow-orange text-end px-2"><strong>{formatScore(result.score.toString() + '/10')}</strong></Col>
+                  <Col className="text-end px-2"><strong>{formatScore(result.score.toString() + '/10')}</strong></Col>
                 </Card.Body>
               </Card>
             ))}

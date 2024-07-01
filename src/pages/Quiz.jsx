@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import NavbarComponent from '../components/Navbar';
 import Footer from '../components/Footer';
 import backgroundImage from '../assets/irithilbit.png';
+import arrowheads from '../assets/arrowheads.png';
 import '../css/Quiz.css';
 
 const Quiz = () => {
@@ -59,17 +60,16 @@ const Quiz = () => {
       });
   }, [id]);
 
-    // Timer logic
-  // useEffect(() => {
-  //   if (timer === 0) {
-  //     handleNextQuestion();
-  //   }
-  //   const interval = setInterval(() => {
-  //     setTimer(prevTimer => (prevTimer > 0 ? prevTimer - 1 : 0));
-  //   }, 1000);
-  //   return () => clearInterval(interval);
-  // }, [timer]); 
-  // DA LASCIARE QUA
+  // Timer logic
+  useEffect(() => {
+    if (timer === 0) {
+      handleNextQuestion();
+    }
+    const interval = setInterval(() => {
+      setTimer(prevTimer => (prevTimer > 0 ? prevTimer - 1 : 0));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [timer]);
 
   const handleChange = (e) => {
     setAnswers({
@@ -107,6 +107,16 @@ const Quiz = () => {
       });
   };
 
+  const getMessage = (score) => {
+    if (score <= 5) {
+      return "You are not Prepared!";
+    } else if (score < 10) {
+      return "You were Prepared..";
+    } else {
+      return "You're impressive!";
+    }
+  };
+
   if (submitted) {
     return (
       <div className="quiz-page" style={{ backgroundImage: `url(${backgroundImage})` }}>
@@ -114,6 +124,7 @@ const Quiz = () => {
         <Container className="quiz-container text-center p-5 mb-4 rounded-3">
           <h2 className="text-yellow bordered-text mb-4">Thank you for completing the quiz!</h2>
           <h3 className="text-yellow bordered-text">Your score is: {score}</h3>
+          <p className="text-yellow bordered-text">{getMessage(score)}</p>
         </Container>
         <Footer quote="Let this journey be the mark of your courage, just as mine was." />
       </div>
@@ -144,21 +155,34 @@ const Quiz = () => {
             <div key={currentQuestion.id} className="mb-4">
               <h4 className="text-yellow bordered-text mb-3">{currentQuestion.question_text}</h4>
               {currentQuestion.answers.map(answer => (
-                <Form.Check
-                  key={answer.id}
-                  type="radio"
-                  label={answer.answer_text}
-                  name={`question-${currentQuestion.id}`}
-                  value={answer.id}
-                  onChange={handleChange}
-                  className="text-yellow"
-                />
+                <div className="quiz-answer" key={answer.id}>
+                  <input
+                    type="radio"
+                    id={`answer-${answer.id}`}
+                    name={`question-${currentQuestion.id}`}
+                    value={answer.id}
+                    onChange={handleChange}
+                  />
+                  <label htmlFor={`answer-${answer.id}`}>
+                    <span style={{ fontSize: '1.3em' }}>{answer.answer_text}</span>
+                  </label>
+                </div>
               ))}
-              <ProgressBar now={(timer / 30) * 100} label={`${timer}s`} className="mt-3" />
+              <ProgressBar 
+                now={(timer / 30) * 100} 
+                label={`${timer}s`} 
+                className="mt-3 custom-progress-bar custom-progress"
+              />
             </div>
           )}
-          <Button variant="primary" type="submit" className="mt-3">
-            {currentQuestionIndex < questions.length - 1 ? 'Next' : 'Submit'}
+          <Button 
+            variant="secondary" 
+            type="submit" 
+            className="mt-3 button-hover-effect" 
+            style={{ padding: '0', border: 'none', background: 'none' }}
+          >
+            <img src={arrowheads} alt="Arrowheads" style={{ width: '70px', height: 'auto' }} />
+            {currentQuestionIndex < questions.length - 1 ? ' ' : ' '}
           </Button>
         </Form>
       </Container>

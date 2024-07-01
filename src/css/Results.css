@@ -17,11 +17,12 @@
     overflow-y: auto !important;
     margin-top: 70px !important; 
     margin-bottom: 50px !important; 
+    padding: 0 15px !important; 
 }
 
 .results-scrollable {
     width: 100% !important;
-    max-width: 1200px !important;
+    max-width: 1400px !important; 
     background-color: rgba(15, 2, 41, 0.4) !important;
     padding: 20px !important;
     border-radius: 10px !important;
@@ -30,12 +31,14 @@
     max-height: 70vh !important; 
     display: flex !important;
     flex-direction: column !important;
-    align-items: flex-start !important; 
+    align-items: center !important; 
 }
 
-.bordered-text {
+.bordered-text-large {
     color: #ffaa00 !important;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7) !important;
+    font-size: 4rem !important; 
+    font-weight: bold !important;
 }
 
 .text-yellow-orange {
@@ -75,10 +78,11 @@
 @media (max-width: 768px) {
     .results-scrollable {
         padding: 10px !important;
+        margin: 0 10px !important; 
     }
 
-    .bordered-text {
-        font-size: 1.2rem !important;
+    .bordered-text-large {
+        font-size: 2rem !important;
     }
 
     .text-yellow-orange {
@@ -101,10 +105,11 @@
 @media (min-width: 769px) and (max-width: 1024px) {
     .results-scrollable {
         padding: 15px !important;
+        margin: 0 15px !important; 
     }
 
-    .bordered-text {
-        font-size: 1.4rem !important;
+    .bordered-text-large {
+        font-size: 2.2rem !important;
     }
 
     .text-yellow-orange {
